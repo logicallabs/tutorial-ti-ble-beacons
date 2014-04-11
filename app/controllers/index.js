@@ -4,6 +4,7 @@
 var 
 	Beacons = Alloy.Globals.Beacons,
 	scanRunning = false,
+	rangingActive = false,
 	beaconRegion,
 	REGION_UUID = 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
 ;
@@ -17,6 +18,40 @@ Beacons.addEventListener('moduleReady', function() {
 	$.status.update('Beacons Module is ready!');
 });
 
+Beacons.addEventListener('rangedBeacons', function(e) {
+	var tableData;
+
+	if (!rangingActive) {
+		// This is necessary because a rangedBeacons event might
+		// be delivered after we call stopRangingBeacons.
+		return;
+	}
+	
+	tableData = [];
+	e.beacons.forEach(function(beacon) {
+		tableData.push({
+			title: 'Major/minor/RSSI: ' +
+					beacon.major + '/' + beacon.minor + '/' + beacon.RSSI
+		});
+	});
+	$.table.setData(tableData);
+});
+
+function startRanging() {
+	rangingActive = true;
+	Beacons.startRangingBeacons({
+		beaconRegion: beaconRegion
+	});
+}
+
+function stopRanging() {
+	rangingActive = false;
+	Beacons.stopRangingBeacons({
+		beaconRegion: beaconRegion
+	});
+	$.table.setData([]);
+}
+
 Beacons.addEventListener('regionStateUpdated', function(e) {
 	var stateStr;
 	
@@ -26,9 +61,11 @@ Beacons.addEventListener('regionStateUpdated', function(e) {
 			break;
 		case Beacons.REGION_STATE_INSIDE:
 			stateStr = 'inside.';
+			startRanging();
 			break;
 		case Beacons.REGION_STATE_OUTSIDE:
 			stateStr = 'outside.';
+			stopRanging();
 			break;
 	}
 	$.status.update('Region state is now ' + stateStr);
@@ -41,6 +78,7 @@ function startScan() {
 }
 
 function stopScan() {
+	stopRanging();
 	Beacons.stopRegionMonitoring({
 		beaconRegion: beaconRegion
 	});
