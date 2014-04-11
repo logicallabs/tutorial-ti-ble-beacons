@@ -7,5 +7,7 @@
 	"os:blackberry": {},
 	"os:ios": {},
 	"os:mobileweb": {},
-	"dependencies": {}
+    "dependencies": {
+        "display": "1.0"
+    }
 }

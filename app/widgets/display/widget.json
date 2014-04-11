@@ -1,0 +1,13 @@
+{
+	"id": "display",
+	"name": "display",
+	"description" : "A composite view with 3 labels, used to display a value",
+	"author": "Logical Labs",
+	"version": "1.0",
+	"copyright":"Copyright (c) 2014",
+	"license":"Public Domain",
+	"min-alloy-version": "1.0",
+	"min-titanium-version":"2.1",
+	"tags":"",
+	"platforms":"android,blackberry,ios,mobileweb,tizen"
+}

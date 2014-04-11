@@ -1,5 +1,10 @@
 <Alloy>
-	<Window class="container">
-		<Label id="label">Hello, World</Label>
+	<Window layout="vertical" backgroundColor="white">
+		<Label id="header">Beacons Example</Label>
+		<Require type="widget" src="display" id="status"
+			preText="Status:"/>
+		<Button title="Start Scanning" id="toggleScanButton"
+			onClick="toggleScan" top=20/>
+		<TableView id="table" top=20, bottom=0/>
 	</Window>
 </Alloy>

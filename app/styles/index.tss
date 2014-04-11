@@ -1,8 +1,9 @@
-".container": {
-	backgroundColor:"white"
+"#header": {
+	top: 30,
+	bottom: 20
 },
 "Label": {
 	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,
-	color: "#000"
+	color: "black"
 } 

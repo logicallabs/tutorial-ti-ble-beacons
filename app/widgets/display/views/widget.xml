@@ -1,0 +1,7 @@
+<Alloy>
+	<View id="parent" layout="horizontal" class="horizontalContainer">
+		<Label id="frontLabel"/>
+		<Label id="valueLabel" left=10/>
+		<Label id="backLabel" left=10/>
+	</View>
+</Alloy>
